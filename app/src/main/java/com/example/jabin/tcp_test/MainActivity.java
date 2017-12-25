@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         rvMsgView.setAdapter(msgViewAdapter);
         rvMsgView.setLayoutManager(new LinearLayoutManager(this));
 
-        final ChatClient chatClient = new ChatClient("192.168.1.104", 1234, myId, new ChatClient.ChatListener() {
+        final ChatClient chatClient = new ChatClient("192.168.8.194", 1234, myId, new ChatClient.ChatListener() {
             @Override
             public void onReceive(ChatMessage chatMessage) {
                 chatMessages.add(chatMessage);
@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 chatMessage.fromId = myId;
                 chatMessage.toIds = toIds;
                 chatClient.send(chatMessage);
-
+                chatMessages.add(chatMessage);
+                handler.sendEmptyMessage(0);
                 etSendMsg.setText("");
             }
         });
